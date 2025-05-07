@@ -11,19 +11,16 @@ const LogEditor = ({ onUpdate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    const timestamp = format(new Date(), 'yyyy-MM-dd');
-    const timeRange = startTime ? `**Time:** ${startTime}${endTime ? ` – ${endTime}` : ''}` : '';
-  
-    const formattedEntry = `**${timestamp}**  
-  ${timeRange}  
+    const newEntry = {
+      date: format(new Date(), 'yyyy-MM-dd'),
+      startTime: startTime || '',
+      endTime: endTime || '',
+      task: task.trim(),
+      result: result.trim(),
+      notes: notes.trim()
+    };
     
-  **Task:** ${task}  
-  **Result:** ${result}  
-  **Notes:** ${notes}  
-  ---
-  `;
-  
-    onUpdate(formattedEntry);
+    onUpdate(newEntry);    
   
     // clear form
     setTask('');
